@@ -1,7 +1,5 @@
 # Opsgenie PowerShell Module
 
-## Introduction
-
 ## OpsGenie-Heartbeat
 All the functions listed below are sending HTTPS requests to OpsGenie via the `Invoke-RestMethod` cmdlet. Learn more about the [Invoke-RestMethod](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-restmethod?view=powershell-6#description).
 Alls responses are returned in the form of an Object.
@@ -48,17 +46,53 @@ Install-Heartbeat
     [-Interval <Heartbeat Interval Integer>]
     [-IntervalUnit <Heartbeat Interval Unit>]
     [-Enabled <Heartbeat Enabled / Disabled (Boolean)>]
-    [-OwnerTeam ]
+    [-OwnerTeam <Owner team of the heartbeat, consisting id and/or name of the owner team>]
+    [-AlertMessage <Specifies the alert message for heartbeat expiration alert. If this is not provided, default alert message is "HeartbeatName is expired". This has a limit of 130 chars, specified by OpsGenie API>]
 ```
 
 ### Update-Heartbeat
+Updates existing heartbeat.
+#### Usage
+```
+Update-Heartbeat
+    [-GenieKey <OpsGenie Authorization Key>]
+    [-heartbeatName <Heartbeat Name>]
+    [-Description <Heartbeat Description (String)>]
+    [-Interval <Heartbeat Interval Integer>]
+    [-IntervalUnit <Heartbeat Interval Unit>]
+    [-Enabled <Heartbeat Enabled / Disabled (Boolean)>]
+    [-OwnerTeam <Owner team of the heartbeat, consisting id and/or name of the owner team>]
+    [-AlertMessage <Specifies the alert message for heartbeat expiration alert. If this is not provided, default alert message is "HeartbeatName is expired". This has a limit of 130 chars, specified by OpsGenie API>]
+```
 
 ### Remove-Heartbeat
+Removes an existing Heartbeat.
+
+#### Usage
+```
+Remove-Heartbeat
+    [-GenieKey <OpsGenie Authorization Key>]
+    [-heartbeatName <Target Heartbeat to remove>]
+```
 
 ### Enable-Heartbeat
+Enables a disabled Heartbeat.
 
+#### Usage
+```
+Enable-Heartbeat
+    [-GenieKey <OpsGenie Authorization Key>]
+    [-heartbeatName <Tartget Heartbeat to enable>]
+```
 ### Disable-Heartbeat 
+Disables an enabled Heartbeat.
 
+#### Usage
+```
+Disable-Heartbeat
+    [-GenieKey <OpsGenie Authorization Key>]
+    [-heartbeatName <Target Heartbeat to disable>]
+```
 ### Heartbeats
 This module supports all API endpoints provided by the [OpsGenie Heartbeat API](https://docs.opsgenie.com/docs/heartbeat-api)
 
@@ -66,5 +100,7 @@ This module supports all API endpoints provided by the [OpsGenie Heartbeat API](
 ### Alerts
 There is currently no integration for OpsGenie Alerts
 
-## Contact Me
-- Email: 
+## TODO
+- Add character limits to parameters if API specifies
+- Consistency of parameter names
+- Add logic for enabling - disabling heartbeats
